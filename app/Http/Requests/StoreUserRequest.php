@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRoleRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,9 @@ class UpdateRoleRequest extends FormRequest
      */
     public function rules(): array
     {
-        $role = $this->route('role');
-
         return [
-            'name' => 'required|unique:roles,name,'.$role->id,
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
         ];
     }
 }
