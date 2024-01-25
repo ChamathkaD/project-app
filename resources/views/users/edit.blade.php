@@ -12,7 +12,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form class="space-y-6" action="{{  route('users.update', $user->id) }}" method="POST">
+            <form class="space-y-6" action="{{  route('profile.update', $user->id) }}" method="POST">
                 @csrf
                 @method('put')
                 <div>

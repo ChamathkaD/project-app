@@ -24,8 +24,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'role' => 'required'
-            
+            'role' => 'required',
+
         ];
     }
 }

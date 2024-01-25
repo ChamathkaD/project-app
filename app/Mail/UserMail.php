@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -14,7 +13,6 @@ class UserMail extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
-
 
     /**
      * Create a new message instance.
@@ -40,7 +38,7 @@ class UserMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            
+
             view: 'emails.user-mail',
         );
     }
