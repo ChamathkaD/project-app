@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -32,4 +33,9 @@ Route::resource('users', UserController::class)->except('show');
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/change-password', [ChangePasswordController::class, 'changePassword'])->name('change.password');
+    Route::post('/change-password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
 });
