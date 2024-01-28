@@ -109,6 +109,13 @@
             </div>
           </div>
 
+          <div class="sm:col-span-4">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              Contact Information
+            </h3>
+            
+          </div>
+
           <div class="sm:col-span-3">
             <label for="address1" class="block text-sm font-medium text-gray-700">
              Address Line One
@@ -142,9 +149,9 @@
             </label>
             <div class="mt-1">
               <select id="distric" name="distric" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <option>Polonnaruwa</option>
-                <option>Mathara</option>
-                <option>Kandy</option>
+                <option value="Polonnaruwa" {{ (Auth::user()->address->distric === 'Polonnaruwa') ? 'selected' : '' }}>Polonnaruwa</option>
+                <option value="Mathara" {{ (Auth::user()->address->distric === 'Mathara') ? 'selected' : '' }}>Mathara</option>
+                <option value="Kandy" {{ (Auth::user()->address->distric === 'Kandy') ? 'selected' : '' }}>Kandy</option>
               </select>
             </div>
             @error('distric')
@@ -158,9 +165,9 @@
             </label>
             <div class="mt-1">
               <select id="province" name="province" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <option value="north_province">North Province</option>
-                <option value="central_province">Cental Province</option>
-                <option value="north_central_province">North Cental Province</option>
+                <option value="North Province" {{ (Auth::user()->address->province === 'North Province') ? 'selected' : '' }}>North Province</option>
+                <option value="Cental Province" {{ (Auth::user()->address->province === 'Cental Province') ? 'selected' : '' }}>Cental Province</option>
+                <option value="North Cental Province" {{ (Auth::user()->address->province === 'North Cental Province') ? 'selected' : '' }}>North Cental Province</option>
               </select>
             </div>
             @error('province')
@@ -169,13 +176,13 @@
           </div>
 
           <div class="sm:col-span-2">
-            <label for="postal-code" class="block text-sm font-medium text-gray-700">
+            <label for="postal_code" class="block text-sm font-medium text-gray-700">
               ZIP / Postal code
             </label>
             <div class="mt-1">
               <input placeholder=" ZIP / Postal code" type="text" name="postal_code" id="postal_code"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ Auth::user()->address->postal_code }}">
             </div>
-            @error('postal-code')
+            @error('postal_code')
             <span class="text-red-500">{{ $message }}</span>
             @enderror
           </div>
@@ -186,10 +193,10 @@
             </label>
             <div class="mt-1">
               <select id="country" name="country" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                <option value="u_s">United States</option>
-                <option value="canada">Canada</option>
-                <option value="mexico">Mexico</option>
-              </select>
+                <option value="United States" {{ (Auth::user()->address->country === 'United States') ? 'selected' : '' }}>United States</option>
+                <option value="Canada" {{ (Auth::user()->address->country === 'Canada') ? 'selected' : '' }}>Canada</option>
+                <option value="Mexico" {{ (Auth::user()->address->country === 'Mexico') ? 'selected' : '' }}>Mexico</option>
+                </select>
             </div>
             @error('country')
             <span class="text-red-500">{{ $message }}</span>
