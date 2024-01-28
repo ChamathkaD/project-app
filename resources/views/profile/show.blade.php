@@ -32,15 +32,15 @@
       </div>
     </div>
   @endif
+
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
+       <div class="max-w-3xl mx-auto">
         
         <form class="space-y-6" action="{{  route('profile.update') }}" method="POST"  enctype="multipart/form-data">
             @csrf
             @method('put')
-    <div class="space-y-8">
 
-      
+      <div class="space-y-8">
       <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
         <!-- Profile Photo File Input -->
         <input type="file" class="hidden"
@@ -65,11 +65,6 @@
         </div>
         @endif
 
-
-
-
-        
-
         <!-- New Profile Photo Preview -->
         <div class="mt-2" x-show="photoPreview">
             <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat"
@@ -91,6 +86,7 @@
           </h3>
           
         </div>
+
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
           <div class="sm:col-span-3">
             <label for="name" class="block text-sm font-medium text-gray-700">
@@ -99,6 +95,9 @@
             <div class="mt-1">
               <input placeholder="Name" type="text" name="name" id="name" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ Auth::user()->name }}">
             </div>
+            @error('name')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
           </div>
 
           <div class="sm:col-span-3">
@@ -110,10 +109,111 @@
             </div>
           </div>
 
+          <div class="sm:col-span-3">
+            <label for="address1" class="block text-sm font-medium text-gray-700">
+             Address Line One
+            </label>
+            <div class="mt-1">
+              <input placeholder="Address Line One" type="text" name="address1" id="address1" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ Auth::user()->address->address1 }}">
+            </div>
+            @error('address1')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
+            
+          </div>
+         
+
+          <div class="sm:col-span-3">
+            <label for="address2" class="block text-sm font-medium text-gray-700">
+             Address Line Two
+            </label>
+            <div class="mt-1">
+              <input placeholder="Address Line Two" type="text" name="address2" id="address2"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"value="{{ Auth::user()->address->address2 }}">
+            </div>
+            @error('address2')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
+           
+          </div>
           
+          <div class="sm:col-span-2">
+            <label for="distric" class="block text-sm font-medium text-gray-700">
+              Distric
+            </label>
+            <div class="mt-1">
+              <select id="distric" name="distric" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <option>Polonnaruwa</option>
+                <option>Mathara</option>
+                <option>Kandy</option>
+              </select>
+            </div>
+            @error('distric')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="province" class="block text-sm font-medium text-gray-700">
+              State / Province
+            </label>
+            <div class="mt-1">
+              <select id="province" name="province" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <option value="north_province">North Province</option>
+                <option value="central_province">Cental Province</option>
+                <option value="north_central_province">North Cental Province</option>
+              </select>
+            </div>
+            @error('province')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="postal-code" class="block text-sm font-medium text-gray-700">
+              ZIP / Postal code
+            </label>
+            <div class="mt-1">
+              <input placeholder=" ZIP / Postal code" type="text" name="postal_code" id="postal_code"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ Auth::user()->address->postal_code }}">
+            </div>
+            @error('postal-code')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="country" class="block text-sm font-medium text-gray-700">
+              Country
+            </label>
+            <div class="mt-1">
+              <select id="country" name="country" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                <option value="u_s">United States</option>
+                <option value="canada">Canada</option>
+                <option value="mexico">Mexico</option>
+              </select>
+            </div>
+            @error('country')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <div class="sm:col-span-3">
+            <label for="city" class="block text-sm font-medium text-gray-700">
+              City
+            </label>
+            <div class="mt-1">
+              <input type="text" name="city" id="city"  class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" value="{{ Auth::user()->address->city }}">
+            </div>   
+            @error('city')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror    
+
+          </div>
+
+
         </div>
-      </div>
-    </div>
+        </div>
+      
+    
 
     <div class="pt-5">
       <div class="flex justify-end">
