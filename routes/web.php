@@ -37,5 +37,5 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/change-password', [ChangePasswordController::class, 'changePassword'])->name('change.password');
-    Route::post('/change-password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
+    Route::put('/change-password', [ChangePasswordController::class, 'updatePassword'])->name('update.password');
 });

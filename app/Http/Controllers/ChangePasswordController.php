@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class ChangePasswordController extends Controller
 {
@@ -16,19 +16,18 @@ class ChangePasswordController extends Controller
     public function updatePassword(Request $request)
     {
         $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|string|min:8|confirmed',
+            'current_password' => ['required', 'string', 'current_password:web'],
+            'password' => ['required', 'string', Password::default(), 'confirmed'],
+        ], [
+            'current_password.current_password' => __('The provided password does not match your current password.'),
         ]);
 
-        $user = Auth::user();
+        $user = auth()->user();
 
-        if (! Hash::check($request->input('current_password'), $user->password)) {
-            return redirect()->back()->with('error', 'Current password is incorrect');
-        }
+        $user->forceFill([
+            'password' => Hash::make($request->password),
+        ])->save();
 
-        $user->password = Hash::make($request->input('new_password'));
-        $user->save();
-
-        return redirect()->route('dashboard')->with('success', 'Password changed successfully');
+        return back()->with('success', __('Password Updated Successfully!'));
     }
 }
