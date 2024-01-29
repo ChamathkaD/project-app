@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +18,7 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $user->name = $request->name;
-        
+
         if ($request->hasFile('photo')) {
             // Delete the old photo if it exists
             if ($user->photo) {
@@ -31,14 +30,9 @@ class ProfileController extends Controller
             $user->photo = $photoPath;
             $user->save();
 
-        
         }
-         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
-    
+
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
 
     }
-
-        
-    
-
 }
