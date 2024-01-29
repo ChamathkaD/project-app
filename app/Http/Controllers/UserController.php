@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Mail\UserMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
@@ -46,11 +48,12 @@ class UserController extends Controller
         $user->assignRole($request->input('role'));
         $user->save();
 
+        Mail::to($user->email)->send(new UserMail($user));
+
         return to_route('users.index')->with('success', 'User created successfully');
 
     }
 
-    
     /**
      * Show the form for editing the specified resource.
      */
